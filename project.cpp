@@ -1,7 +1,8 @@
-// Online C++ compiler to run C++ program online
+
 #include <iostream>
 #include <string>
-#include <limits>
+#include "global.h"
+#include "book.h"
 using namespace std;
 
 const int MAX_STUDENTS = 20; 
@@ -28,11 +29,6 @@ int numStudents = 0;
 // 0 = null; 1 = admin, 2 = student;
 int loggedInUser = 0;
 
-void initialMessages();
-void processInput(int input);
-void registration();
-void viewStudents();
-void login();
 
 void login(int userRole){
     string name;
@@ -82,8 +78,14 @@ void processInput(int input){
         case 2:
             registration();
             break;
+        case 3:
+            addbook();
+            break;
         case 4:
             viewStudents();
+            break;
+        case 5:
+            viewBooks();
             break;
         default:
             cout << "no option selected";
@@ -98,6 +100,7 @@ void initialMessages(){
     if(loggedInUser){
         cout << "3. Add book"<< endl;
         cout << "4. View students"<< endl;
+        cout << "5. View All Books"<< endl;
     }else{
         cout << "1. Login" << endl;
         cout << "2. Registration"<< endl;
@@ -123,8 +126,7 @@ void registration(){
     cout << "type your password: ";
     cin >> pass;
     
-    // Clear the newline character from the input buffer
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.ignore();
     students[numStudents].setPassword(pass);
     
     numStudents++;
