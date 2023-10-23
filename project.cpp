@@ -27,13 +27,13 @@ void processInput(int input){
             viewBooks();
             break;
         default:
-            cout << "no option selected";
+            cout << "please select a valid option" << endl;
             break;
     }
 };
 
 void initialMessages(){
-    cout << "\n";
+    cout << endl;
     int userInput;
     
     if(loggedInUser){

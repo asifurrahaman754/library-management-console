@@ -1,3 +1,4 @@
+#include <limits>
 
 void login(){
     int userRole;
@@ -39,21 +40,25 @@ void login(){
     initialMessages();
 }
 
-
-void registration(){
+void registration() {
     string pass;
+
+    cout << "Type your name: ";
+    getline(cin, students[numStudents].name); 
     
-    cout << "type your name: ";
-    cin >> students[numStudents].name;
-    cout << "type your Id: ";
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << "Type your Id: ";
     cin >> students[numStudents].id;
-    cout << "type your password: ";
+
+    // Clear the input buffer before reading the password
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    cout << "Type your password: ";
     cin >> pass;
-    
-    cin.ignore();
+
     students[numStudents].setPassword(pass);
-    
+
     numStudents++;
-    cout << "student added :)"<<endl;
+    cout << "Student added :)" << endl;
     initialMessages();
 }
