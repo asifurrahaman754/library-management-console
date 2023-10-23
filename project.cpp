@@ -2,78 +2,14 @@
 #include <iostream>
 #include <string>
 #include "global.h"
+#include "auth.h"
 #include "book.h"
 using namespace std;
-
-const int MAX_STUDENTS = 20; 
-
-class Student {
-private:
-    string password;
-public:
-    string name;
-    int id;
-    
-    void setPassword(string pass) {
-        password = pass;
-    }
-    
-    string getPassword(){
-        return password;
-    }
-};
-
-Student students[MAX_STUDENTS];
-Student admin;
-int numStudents = 0;
-// 0 = null; 1 = admin, 2 = student;
-int loggedInUser = 0;
-
-
-void login(int userRole){
-    string name;
-    string pass;
-    
-    cout << "type your name: ";
-    cin >> name;
-    cout << "type your password: ";
-    cin >> pass;
-    if(userRole == 1){
-        if(admin.name == name && admin.getPassword() == pass){
-            cout << "Welcome admin!"<< endl;
-            loggedInUser = 1;
-        }else{
-            cout << "Wrong credentials!"<<endl;
-        }
-        
-    }else if(userRole == 2){
-        int userFound = 0;
-        for(int i = 0; i < numStudents; i++){
-            if(students[i].name == name && students[i].getPassword() == pass){
-                cout << "Welcome "<< name;
-                loggedInUser = 2;
-                userFound = 1;
-                break;
-            }
-        }
-        
-        if(!userFound){
-            cout << "No data Found!"<<endl;
-        }
-    }
-    
-    initialMessages();
-}
 
 void processInput(int input){
     switch(input){
         case 1:
-            int userRole;
-            cout << "1. Login as Admin" << endl;
-            cout << "2. Login as Student" << endl;
-            cin >> userRole;
-            login(userRole);
-            
+            login();
             break;
         case 2:
             registration();
@@ -82,9 +18,12 @@ void processInput(int input){
             addbook();
             break;
         case 4:
-            viewStudents();
+            deleteBook();
             break;
         case 5:
+            viewStudents();
+            break;
+        case 6:
             viewBooks();
             break;
         default:
@@ -98,9 +37,11 @@ void initialMessages(){
     int userInput;
     
     if(loggedInUser){
+        cout << "------------------------"<< endl << endl;
         cout << "3. Add book"<< endl;
-        cout << "4. View students"<< endl;
-        cout << "5. View All Books"<< endl;
+        cout << "4. Delete book"<< endl;
+        cout << "5. View students"<< endl;
+        cout << "6. View All Books"<< endl;
     }else{
         cout << "1. Login" << endl;
         cout << "2. Registration"<< endl;
@@ -114,24 +55,6 @@ void initialMessages(){
     }else{
         processInput(userInput);
     }
-}
-
-void registration(){
-    string pass;
-    
-    cout << "type your name: ";
-    cin >> students[numStudents].name;
-    cout << "type your Id: ";
-    cin >> students[numStudents].id;
-    cout << "type your password: ";
-    cin >> pass;
-    
-    cin.ignore();
-    students[numStudents].setPassword(pass);
-    
-    numStudents++;
-    cout << "student added :)"<<endl;
-    initialMessages();
 }
 
 void viewStudents(){

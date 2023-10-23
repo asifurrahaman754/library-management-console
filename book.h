@@ -45,3 +45,29 @@ void addbook(){
     cout << "book added :)"<<endl;
     initialMessages();
 }
+
+void deleteBook(){
+    cout << "type book id: ";
+    int bookId;
+    cin >> bookId;
+
+    int bookDeleted = 0;
+    for(int i = 0; i < numBooks; i++){
+        if(books[i].id == bookId){
+            for(int j = i; j < numBooks; j++){
+                books[j] = books[j+1];
+            }
+            numBooks--;
+            bookDeleted = 1;
+            break;
+        }
+    }
+
+    if(!bookDeleted){
+        cout << "no book found with id: "<< bookId << endl;
+    }else{
+        cout << "book deleted succesfully :)"<<endl;
+    }
+
+    initialMessages();
+}
