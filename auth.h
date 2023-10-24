@@ -9,10 +9,12 @@ void login(){
     cout << "2. Login as Student" << endl;
     cin >> userRole;
     
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "type your name: ";
-    cin >> name;
+    getline(cin, name); 
     cout << "type your password: ";
-    cin >> pass;
+    getline(cin, pass); 
+
     if(userRole == 1){
         if(admin.name == name && admin.getPassword() == pass){
             cout << "Welcome admin!"<< endl;
@@ -43,15 +45,12 @@ void login(){
 void registration() {
     string pass;
 
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "Type your name: ";
     getline(cin, students[numStudents].name); 
-    
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  
     cout << "Type your Id: ";
     cin >> students[numStudents].id;
-
-    // Clear the input buffer before reading the password
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "Type your password: ";
     cin >> pass;

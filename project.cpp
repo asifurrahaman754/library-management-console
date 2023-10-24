@@ -37,16 +37,22 @@ void initialMessages(){
     int userInput;
     
     if(loggedInUser){
+       if(loggedInUser == 1){
         cout << "------------------------"<< endl << endl;
         cout << "3. Add book"<< endl;
         cout << "4. Delete book"<< endl;
         cout << "5. View students"<< endl;
         cout << "6. View All Books"<< endl;
+       }else if(loggedInUser == 2){
+        cout << "------------------------"<< endl << endl;
+        cout << "6. View All Books"<< endl;
+       }
     }else{
+        cout << "------------------------"<< endl << endl;
         cout << "1. Login" << endl;
         cout << "2. Registration"<< endl;
     }
-    cout << "Please type the order number to select an option" << endl;
+    cout << "Type the order number to select an option" << endl;
     cin >> userInput;
     
     if(!loggedInUser && userInput > 2){
@@ -70,6 +76,7 @@ void viewStudents(){
 }
 
 int main() {
+    cout << "Welcome to Library Management System" << endl;
     // admin by default
     admin.name = "admin";
     admin.setPassword("1234");
