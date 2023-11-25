@@ -1,5 +1,6 @@
 #include <string>
 #include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ int numBooks = 0;
 
 
 void viewBooks() {
+    cout << endl;
     if (numBooks == 0) {
         cout << "No books found" << endl;
     } else {
@@ -37,6 +39,7 @@ void viewBooks() {
 }
 
 void addbook(){
+    cout << endl;
     cout << "type book name: ";
     cin.ignore();
     getline(cin, books[numBooks].name);
@@ -53,6 +56,7 @@ void addbook(){
 }
 
 void deleteBook(){
+    cout << endl;
     cout << "type book id: ";
     int bookId;
     cin >> bookId;
@@ -73,6 +77,50 @@ void deleteBook(){
         cout << "no book found with id: "<< bookId << endl;
     }else{
         cout << "book deleted succesfully :)"<<endl;
+    }
+
+    initialMessages();
+}
+
+void searchBook() {
+    cout << endl;
+    if (numBooks == 0) {
+        cout << "No books Added" << endl;
+        initialMessages();
+        return;
+    }
+
+    cout << "Enter book name to search: ";
+    string searchQuery;
+    cin.ignore();
+    getline(cin, searchQuery);
+
+    bool found = false;
+
+    cout << setw(20) << "Name" << setw(20) << "Author" << setw(10) << "ID" << setw(10) << "Quantity" << endl;
+    cout << setfill('-') << setw(60) << "-" << setfill(' ') << endl;
+
+    for (int i = 0; i < numBooks; i++) {
+        // Case-insensitive search by converting both searchQuery and book name to lowercase
+        string lowerSearchQuery = searchQuery;
+        transform(lowerSearchQuery.begin(), lowerSearchQuery.end(), lowerSearchQuery.begin(), ::tolower);
+
+        string lowerBookName = books[i].name;
+        transform(lowerBookName.begin(), lowerBookName.end(), lowerBookName.begin(), ::tolower);
+
+        if (lowerBookName.find(lowerSearchQuery) != string::npos) {
+            cout << setw(20) << books[i].name
+                 << setw(20) << books[i].author
+                 << setw(10) << books[i].id
+                 << setw(10) << books[i].quantity
+                 << endl;
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << "No matching books found." << endl;
     }
 
     initialMessages();

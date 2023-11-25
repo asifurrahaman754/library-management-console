@@ -8,6 +8,9 @@ using namespace std;
 
 void processInput(int input){
     switch(input){
+        case 0:
+            logOut();
+            break;
         case 1:
             login();
             break;
@@ -26,8 +29,12 @@ void processInput(int input){
         case 6:
             viewBooks();
             break;
+        case 7:
+            searchBook();
+            break;
         default:
             cout << "please select a valid option" << endl;
+            initialMessages();
             break;
     }
 };
@@ -35,7 +42,7 @@ void processInput(int input){
 void initialMessages(){
     cout << endl;
     int userInput;
-    
+
     if(loggedInUser){
        if(loggedInUser == 1){
         cout << "------------------------"<< endl << endl;
@@ -46,7 +53,10 @@ void initialMessages(){
        }else if(loggedInUser == 2){
         cout << "------------------------"<< endl << endl;
         cout << "6. View All Books"<< endl;
+        cout << "7. search Books"<< endl;
+        cout << "8. Issue book"<< endl;
        }
+       cout << "To logout type 0" << endl << endl;
     }else{
         cout << "------------------------"<< endl << endl;
         cout << "1. Login" << endl;
@@ -54,7 +64,7 @@ void initialMessages(){
     }
     cout << "Type the order number to select an option" << endl;
     cin >> userInput;
-    
+
     if(!loggedInUser && userInput > 2){
         cout << "please login!" << endl;
         initialMessages();
@@ -80,6 +90,13 @@ int main() {
     // admin by default
     admin.name = "admin";
     admin.setPassword("1234");
+
+    //student by default
+    students[numStudents].name = "asifur";
+    students[numStudents].id = 777;
+    students[numStudents].setPassword("1234");
+    numStudents++;
+
     initialMessages();
 
     return 0;

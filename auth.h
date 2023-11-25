@@ -1,6 +1,7 @@
 #include <limits>
 
 void login(){
+    cout << endl;
     int userRole;
     string name;
     string pass;
@@ -8,21 +9,21 @@ void login(){
     cout << "1. Login as Admin" << endl;
     cout << "2. Login as Student" << endl;
     cin >> userRole;
-    
+
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "type your name: ";
-    getline(cin, name); 
+    getline(cin, name);
     cout << "type your password: ";
-    getline(cin, pass); 
+    getline(cin, pass);
 
     if(userRole == 1){
         if(admin.name == name && admin.getPassword() == pass){
-            cout << "Welcome admin!"<< endl;
+            cout << "Welcome "<< admin.name << "."<< endl;
             loggedInUser = 1;
         }else{
             cout << "Wrong credentials!"<<endl;
         }
-        
+
     }else if(userRole == 2){
         int userFound = 0;
         for(int i = 0; i < numStudents; i++){
@@ -33,22 +34,30 @@ void login(){
                 break;
             }
         }
-        
+
         if(!userFound){
             cout << "No data Found!"<<endl;
         }
     }
-    
+
+    initialMessages();
+}
+
+void logOut (){
+    cout << endl;
+    cout << "Loged out!";
+    loggedInUser = 0;
     initialMessages();
 }
 
 void registration() {
+    cout << endl;
     string pass;
 
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "Type your name: ";
-    getline(cin, students[numStudents].name); 
-  
+    getline(cin, students[numStudents].name);
+
     cout << "Type your Id: ";
     cin >> students[numStudents].id;
 

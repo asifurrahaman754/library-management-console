@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-const int MAX_STUDENTS = 20; 
+const int MAX_STUDENTS = 20;
 
 class Student {
 private:
@@ -10,11 +10,11 @@ private:
 public:
     string name;
     int id;
-    
+
     void setPassword(string pass) {
         password = pass;
     }
-    
+
     string getPassword(){
         return password;
     }
@@ -34,3 +34,4 @@ void login();
 void addbook();
 void viewBooks();
 void deleteBook();
+void searchBook();
