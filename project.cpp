@@ -1,7 +1,4 @@
-
-#include <iostream>
-#include <string>
-#include "global.h"
+#include "state.h"
 #include "auth.h"
 #include "book.h"
 using namespace std;
@@ -35,6 +32,9 @@ void processInput(int input){
         case 8:
             issueBook();
             break;
+        case 9:
+            showIssuedBook();
+            break;
         default:
             cout << "please select a valid option" << endl;
             initialMessages();
@@ -46,18 +46,19 @@ void initialMessages(){
     cout << endl;
     int userInput;
 
-    if(loggedInUser){
-       if(loggedInUser == 1){
+    if(loggedInUser != nullptr){
+       if(loggedInUser->type == 1){
         cout << "------------------------"<< endl << endl;
         cout << "3. Add book"<< endl;
         cout << "4. Delete book"<< endl;
         cout << "5. View students"<< endl;
         cout << "6. View All Books"<< endl;
-       }else if(loggedInUser == 2){
+       }else if(loggedInUser->type == 2){
         cout << "------------------------"<< endl << endl;
         cout << "6. View All Books"<< endl;
         cout << "7. search Books"<< endl;
         cout << "8. Issue book"<< endl;
+        cout << "9. Show issued books"<< endl;
        }
        cout << "To logout type 0" << endl << endl;
     }else{

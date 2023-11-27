@@ -19,7 +19,10 @@ void login(){
     if(userRole == 1){
         if(admin.name == name && admin.getPassword() == pass){
             cout << "Welcome "<< admin.name << "."<< endl;
-            loggedInUser = 1;
+            loggedInUser = new Student;
+            loggedInUser->name = name;
+            loggedInUser->setPassword(pass);
+            loggedInUser->type = 1;
         }else{
             cout << "Wrong credentials!"<<endl;
         }
@@ -29,7 +32,10 @@ void login(){
         for(int i = 0; i < numStudents; i++){
             if(students[i].name == name && students[i].getPassword() == pass){
                 cout << "Welcome "<< name;
-                loggedInUser = 2;
+                loggedInUser = new Student;
+                loggedInUser->name = name;
+                loggedInUser->setPassword(pass);
+                loggedInUser->id = students[i].id;
                 userFound = 1;
                 break;
             }
@@ -40,7 +46,7 @@ void login(){
         }
     }
 
-    initialMessages();
+   initialMessages();
 }
 
 void logOut (){

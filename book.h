@@ -4,20 +4,6 @@
 
 using namespace std;
 
-const int MAX_BOOKS = 30;
-
-class Book{
-    public:
-        string name;
-        string author;
-        int id;
-        int quantity;
-};
-
-Book books[MAX_BOOKS];
-int numBooks = 0;
-
-
 void viewBooks() {
     cout << endl;
     if (numBooks == 0) {
@@ -107,12 +93,49 @@ void issueBook(){
         cout << "Book with ID " << bookId << " not found." << endl;
     } else {
         if (books[bookIndex].quantity > 0) {
-            // Update book quantity
             books[bookIndex].quantity--;
+
+            // find the student and add the book to their list
+            for (int i = 0; i < numStudents; i++) {
+                if (students[i].id == loggedInUser->id) {
+                    students[i].books[students[i].numBooksIssued] = books[bookIndex];
+                    students[i].numBooksIssued++;
+                    break;
+                }
+            }
 
             cout << "Book '" << books[bookIndex].name << "' issued successfully. Remaining quantity: " << books[bookIndex].quantity << endl;
         } else {
             cout << "Sorry, no more copies of this book available for issuing." << endl;
+        }
+    }
+
+    initialMessages();
+}
+
+void showIssuedBook(){
+    cout << endl;
+
+    cout << "Here are the books issued to - " << loggedInUser->name << ":" << endl << endl;
+    cout << setw(20) << "Name" << setw(20) << "Author" << setw(10) << "ID" << setw(10) << "Quantity" << endl;
+    cout << setfill('-') << setw(60) << "-" << setfill(' ') << endl;
+
+    int studentIndex = -1;
+
+    for (int i = 0; i < numStudents; i++) {
+        if (students[i].id == loggedInUser->id) {
+            studentIndex = i;
+            break;
+        }
+    }
+
+    if(studentIndex != -1){
+        for (int i = 0; i < students[studentIndex].numBooksIssued; i++) {
+            cout << setw(20) << students[studentIndex].books[i].name
+                << setw(20) << students[studentIndex].books[i].author
+                << setw(10) << students[studentIndex].books[i].id
+                << setw(10) << students[studentIndex].books[i].quantity
+                << endl;
         }
     }
 
