@@ -82,6 +82,43 @@ void deleteBook(){
     initialMessages();
 }
 
+void issueBook(){
+    cout << endl;
+    if (numBooks == 0) {
+        cout << "No books available for issuing." << endl;
+        initialMessages();
+        return;
+    }
+
+    cout << "Enter book ID to issue: ";
+    int bookId;
+    cin >> bookId;
+
+    int bookIndex = -1;
+
+    for (int i = 0; i < numBooks; i++) {
+        if (books[i].id == bookId) {
+            bookIndex = i;
+            break;
+        }
+    }
+
+    if (bookIndex == -1) {
+        cout << "Book with ID " << bookId << " not found." << endl;
+    } else {
+        if (books[bookIndex].quantity > 0) {
+            // Update book quantity
+            books[bookIndex].quantity--;
+
+            cout << "Book '" << books[bookIndex].name << "' issued successfully. Remaining quantity: " << books[bookIndex].quantity << endl;
+        } else {
+            cout << "Sorry, no more copies of this book available for issuing." << endl;
+        }
+    }
+
+    initialMessages();
+}
+
 void searchBook() {
     cout << endl;
     if (numBooks == 0) {

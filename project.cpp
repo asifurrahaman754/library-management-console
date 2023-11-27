@@ -32,6 +32,9 @@ void processInput(int input){
         case 7:
             searchBook();
             break;
+        case 8:
+            issueBook();
+            break;
         default:
             cout << "please select a valid option" << endl;
             initialMessages();
