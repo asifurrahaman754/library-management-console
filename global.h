@@ -36,6 +36,7 @@ class Student {
 
 void initialMessages();
 void processInput(int input);
+void validate(int input);
 void registration();
 void viewStudents();
 void login();

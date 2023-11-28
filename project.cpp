@@ -69,11 +69,23 @@ void initialMessages(){
     cout << "Type the order number to select an option" << endl;
     cin >> userInput;
 
-    if(!loggedInUser && userInput > 2){
+   validate(userInput);
+}
+
+void validate(int input){
+    if(!loggedInUser && input > 2){
         cout << "please login!" << endl;
         initialMessages();
+    }else if(loggedInUser != nullptr && input == 0){
+        processInput(input);
+    }else if(loggedInUser != nullptr && loggedInUser->type == 1 && (input < 3 || input > 6)){
+        cout << "Invalid option!" << endl;
+        initialMessages();
+    }else if(loggedInUser != nullptr && loggedInUser->type == 2 && (input < 6 || input > 9)){
+        cout << "Invalid option!" << endl;
+        initialMessages();
     }else{
-        processInput(userInput);
+        processInput(input);
     }
 }
 
