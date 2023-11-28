@@ -185,3 +185,51 @@ void searchBook() {
 
     initialMessages();
 }
+
+void returnBook(){
+    cout << endl;
+    if (numBooks == 0) {
+        cout << "No books available for returning." << endl;
+        initialMessages();
+        return;
+    }
+
+    cout << "Enter book ID to return: ";
+    int bookId;
+    cin >> bookId;
+
+    int bookIndex = -1;
+
+    for (int i = 0; i < numBooks; i++) {
+        if (books[i].id == bookId) {
+            bookIndex = i;
+            break;
+        }
+    }
+
+    if (bookIndex == -1) {
+        cout << "Book with ID " << bookId << " not found." << endl;
+    } else {
+        books[bookIndex].quantity++;
+
+        // find the student and remove the book from their list
+        for (int i = 0; i < numStudents; i++) {
+            if (students[i].id == loggedInUser->id) {
+                for (int j = 0; j < students[i].numBooksIssued; j++) {
+                    if (students[i].books[j].id == bookId) {
+                        for (int k = j; k < students[i].numBooksIssued; k++) {
+                            students[i].books[k] = students[i].books[k + 1];
+                        }
+                        students[i].numBooksIssued--;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        cout << "Book '" << books[bookIndex].name << "' returned successfully. Remaining quantity: " << books[bookIndex].quantity << endl;
+    }
+
+    initialMessages();
+}

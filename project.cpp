@@ -35,6 +35,9 @@ void processInput(int input){
         case 9:
             showIssuedBook();
             break;
+        case 10:
+            returnBook();
+            break;
         default:
             cout << "please select a valid option" << endl;
             initialMessages();
@@ -59,6 +62,7 @@ void initialMessages(){
         cout << "7. search Books"<< endl;
         cout << "8. Issue book"<< endl;
         cout << "9. Show issued books"<< endl;
+        cout << "10. Return book"<< endl;
        }
        cout << "To logout type 0" << endl << endl;
     }else{
@@ -81,7 +85,7 @@ void validate(int input){
     }else if(loggedInUser != nullptr && loggedInUser->type == 1 && (input < 3 || input > 6)){
         cout << "Invalid option!" << endl;
         initialMessages();
-    }else if(loggedInUser != nullptr && loggedInUser->type == 2 && (input < 6 || input > 9)){
+    }else if(loggedInUser != nullptr && loggedInUser->type == 2 && (input < 6 || input > 10)){
         cout << "Invalid option!" << endl;
         initialMessages();
     }else{
